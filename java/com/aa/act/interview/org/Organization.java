@@ -19,14 +19,21 @@ public abstract class Organization {
 	 * @param title
 	 * @return the newly filled position or empty if no position has that title
 	 */
+        
+        int identifier=999;
 	public Optional<Position> hire(Name person, String title) {
 		//your code here
-		return Optional.empty();
+		
+		identifier=identifier+1;// generates an employee number
+		Employee empl=new Employee(identifier, person); // assigns that employee number and first and last name to the person
+		Position posn= new Position(title,empl); //assigns corresponding title to the employee 
+		root.addDirectReport(posn);//adds direct report
+		 return Optional.of(posn);
 	}
 
 	@Override
 	public String toString() {
-		return printOrganization(root, "");
+		return printOrganization(root,"");
 	}
 	
 	private String printOrganization(Position pos, String prefix) {
